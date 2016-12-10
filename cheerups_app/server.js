@@ -18,15 +18,20 @@ db.once('open', function() {
   console.log('Connected and ready to cheer!');
 });
 
+// require the controllers
+var cheerupsController = require('./controllers/cheerupsController.js');
 
+// middleware
+app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-
-
-
+// controller middleware
+app.use('/cheerups', cheerupsController);
 
 // root route
 app.get('/', function(req, res) {
-  res.send('I am here!');
+  res.redirect('/cheerups');
 });
 
 // listener
