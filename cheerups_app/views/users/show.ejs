@@ -13,7 +13,7 @@
           <ul class='nav nav-tabs'>
             <li><a href='/cheerups'>Go Home</a></li>
             <li><a href="/users">Back to All Users</a></li>
-            <li><a href="/users/<%=user._id%>/edit">Edit This User</a></li>
+            <li><a href="/users/<%=user._id%>/edit">Edit My Info</a></li>
           </ul>
         </nav>
       </header>
@@ -23,6 +23,12 @@
           <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
               <img src="<%=user.cheerupPage[i].visualmedia%>"/>
+              <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>/edit" method="GET">
+                <input type="submit" value="Edit This Cheerup">
+              </form>
+              <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete This Cheerup">
+              </form>
             </div>
           </div>
         <% } %>
