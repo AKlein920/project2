@@ -9,10 +9,21 @@
   <body>
 
     <div class="container">
-      <h1>All Users</h1>
-      <% for (var i=0; i<allUsers.length; i++) { %>
-        <a href="/users/<%=allUsers[i]._id%>"><%=allUsers[i].username%></a>
-      <% } %>
+      <header>
+        <nav>
+          <ul class='nav nav-tabs'>
+            <li><a href="/cheerups">Go Home</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>All Users</h1>
+        <% for (var i=0; i<allUsers.length; i++) { %>
+          <div class="thumbnail">
+            <a href="/users/<%=allUsers[i]._id%>"><%=allUsers[i].username%></a>
+          </div>
+        <% } %>
+      </main>
     </div>
 
   </body>

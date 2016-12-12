@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+<div class="container">
+  <header>
+    <nav>
+      <ul class="nav nav-tabs">
+        <li><a href="/cheerups">Go Home</a></li>
+        <li><a href="/users/<%=user._id%>">Back to All Users</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Edit This User</h1>
+
+    <div class="form-group">
+      <form class="" action="/users/<%=user._id%>?_method=PUT" method="POST">
+        <input class='form-control' type="text" name="username" value="<%=user.username%>">
+        <input class='form-control' type="text" name="password" value="<%=user.password%>">
+        <input type="submit" value="Edit My Profile">
+      </form>
+
+      <form class="" action="/users/<%=user._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete My Account">
+      </form>
+  </main>
+</div>
+  </body>
+</html>
