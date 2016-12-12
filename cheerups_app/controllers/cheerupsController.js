@@ -28,7 +28,14 @@ router.get('/new', function(req, res) {
   res.render('cheerups/new.ejs');
 });
 
-
+// show route
+router.get('/:id', function(req, res) {
+  Cheerup.findById(req.params.id, function(err, foundCheerup) {
+    res.render('cheerups/show.ejs', {
+      cheerup: foundCheerup
+    });
+  });
+});
 
 
 

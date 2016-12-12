@@ -13,7 +13,7 @@
     <nav>
       <ul class='nav'>
         <li><a href='/'>Go Home</a></li>
-        <li><a href="cheerups/new"></a></li>
+        <li><a href='cheerups/new'>Add a New Cheerup</a></li>
       </ul>
     </nav>
   </header>
@@ -22,7 +22,7 @@
 
     <% for (var i=0; i<allCheerups.length; i++) { %>
       <div class=''>
-        <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+        <a href="cheerups/<%=allCheerups[i]._id%>"><img src="<%=allCheerups[i].visualmedia%>" alt=""/></a>
         <p><%=allCheerups[i].body%></p>
       </div>
     <% } %>
