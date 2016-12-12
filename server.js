@@ -6,10 +6,11 @@ var methodOverride = require('method-override');
 var app = express();
 
 // port
-var port = 3000;
+var port = process.env.PORT || 3000;
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost/cheerups_app';
 
 // database
-mongoose.connect('mongodb://localhost/cheerups_app');
+mongoose.connect(mongoDBURI);
 
 var db = mongoose.connection;
 
