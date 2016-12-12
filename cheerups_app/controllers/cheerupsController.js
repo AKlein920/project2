@@ -57,7 +57,12 @@ router.put('/:id', function(req, res) {
 // delete route
 router.delete('/:id', function(req, res) {
   Cheerup.findByIdAndRemove(req.params.id, function(err, foundCheerup) {
-    res.redirect('/cheerups');
+    User.findOne({'cheerupPage._id':req.params.id}, function(err, foundUser) {
+      foundUser.cheerupPage.id(req.params.id).remove();
+      foundUser.save(function(err, data) {
+        res.redirect('/cheerups');
+      });
+    });
   });
 });
 

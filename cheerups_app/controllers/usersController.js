@@ -35,15 +35,6 @@ router.get('/:id/edit', function(req, res) {
   });
 });
 
-// show route
-router.get('/:id', function(req, res) {
-  User.findById(req.params.id, function(err, foundUser) {
-    res.render('users/show.ejs', {
-      user: foundUser
-    });
-  });
-});
-
 // update route
 router.put('/:id', function(req, res) {
   User.findByIdAndUpdate(req.params.id, req.body, function(err, foundUser) {
@@ -55,6 +46,15 @@ router.put('/:id', function(req, res) {
 router.delete('/:id', function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, foundUser) {
     res.redirect('/users');
+  });
+});
+
+// show route
+router.get('/:id', function(req, res) {
+  User.findById(req.params.id, function(err, foundUser) {
+    res.render('users/show.ejs', {
+      user: foundUser
+    });
   });
 });
 
