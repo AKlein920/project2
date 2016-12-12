@@ -14,6 +14,7 @@
           <ul class='nav'>
             <li><a href='/'>Go Home</a></li>
             <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+            <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit This Cheerup</a></li>
           </ul>
         </nav>
       </header>
@@ -22,6 +23,7 @@
         <div class="jumbotron">
           <img src="<%=cheerup.visualmedia%>"/>
           <p><%=cheerup.body%></p>
+          <p>Created by: <%=cheerup.user%></p>
           <p>Created at: <%=cheerup.createdat%></p>
           <p>Number of cheers: <%=cheerup.cheers%></p>
           <% for (var i=0; i<cheerup.keywords.length; i++) { %>

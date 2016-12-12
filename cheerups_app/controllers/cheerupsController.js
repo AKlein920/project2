@@ -28,6 +28,22 @@ router.get('/new', function(req, res) {
   res.render('cheerups/new.ejs');
 });
 
+// edit route
+router.get('/:id/edit', function(req, res) {
+  Cheerup.findById(req.params.id, function(err, foundCheerup) {
+    res.render('cheerups/edit.ejs', {
+      cheerup: foundCheerup
+    });
+  });
+});
+
+// update route
+router.put('/:id', function(req, res) {
+  Cheerup.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, foundCheerup) {
+    res.redirect('/cheerups/'+req.params.id);
+  });
+});
+
 // show route
 router.get('/:id', function(req, res) {
   Cheerup.findById(req.params.id, function(err, foundCheerup) {
