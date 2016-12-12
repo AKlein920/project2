@@ -12,10 +12,10 @@
   <header>
     <nav>
       <ul class='nav nav-tabs'>
-        <li><a href='/'>Go Home</a></li>
+        <li><a href='/'>Back to All Cheerups</a></li>
         <li><a href='cheerups/new'>Add a New Cheerup</a></li>
-        <li><a href="/users/new">Add a New User</a></li>
-        <li><a href='/users'>Go to All Users</a></li>
+        <li><a href="/users/new">Sign Up</a></li>
+        <li><a href='/users'>View All Users</a></li>
       </ul>
     </nav>
   </header>
@@ -26,9 +26,16 @@
       <div class='col-sm-6 col-md-4'>
         <div class="thumbnail">
           <a href="cheerups/<%=allCheerups[i]._id%>">
-            <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+            <% if (allCheerups[i].visualmedia) { %>
+              <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+            <% } else { %>
+              <p><%=allCheerups[i].body%></p>
+            <% } %>
           </a>
-          <p><%=allCheerups[i].body%></p>
+          <% if (allCheerups[i].visualmedia) { %>
+            <p><%=allCheerups[i].body%></p>
+          <% } else { %>
+          <% } %>
         </div>
       </div>
     <% } %>
