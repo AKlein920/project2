@@ -20,6 +20,7 @@ db.once('open', function() {
 
 // require the controllers
 var cheerupsController = require('./controllers/cheerupsController.js');
+var usersController = require('./controllers/usersController.js');
 
 // middleware
 app.use(methodOverride('_method'));
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 
 // controller middleware
 app.use('/cheerups', cheerupsController);
+app.use('/users', usersController);
 
 // root route
 app.get('/', function(req, res) {

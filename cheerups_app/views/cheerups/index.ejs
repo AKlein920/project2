@@ -14,6 +14,7 @@
       <ul class='nav'>
         <li><a href='/'>Go Home</a></li>
         <li><a href='cheerups/new'>Add a New Cheerup</a></li>
+        <li><a href='/users'>Go to All Users</a></li>
       </ul>
     </nav>
   </header>
@@ -21,9 +22,13 @@
     <h1>Cheerups!</h1>
 
     <% for (var i=0; i<allCheerups.length; i++) { %>
-      <div class=''>
-        <a href="cheerups/<%=allCheerups[i]._id%>"><img src="<%=allCheerups[i].visualmedia%>" alt=""/></a>
-        <p><%=allCheerups[i].body%></p>
+      <div class='col-sm-6 col-md-4'>
+        <div class="thumbnail">
+          <a href="cheerups/<%=allCheerups[i]._id%>">
+            <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+          </a>
+          <p><%=allCheerups[i].body%></p>
+        </div>
       </div>
     <% } %>
   </main>

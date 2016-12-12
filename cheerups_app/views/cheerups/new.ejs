@@ -21,7 +21,12 @@
 
   <div class="form-group">
     <form class="" action="/cheerups" method="POST">
-      <input class='form-control' type="text" name="user" value="User">
+      <select class="form-control" name="userId">
+        <option>Select a User</option>
+        <% for (var i=0; i<allUsers.length; i++) { %>
+          <option value="<%=allUsers[i]._id%>"><%=allUsers[i].username%></option>
+        <% } %>
+      </select>
       <input class='form-control' type="text" name="visualmedia" value="Image, gif, or video URL">
       <input class='form-control' type="text" name="body" value="Text">
       <input class='form-control' type="text" name="keywords" value="#Keywords">

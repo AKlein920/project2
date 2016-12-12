@@ -4,28 +4,38 @@ var router = express.Router();
 
 // require the models
 var Cheerup = require('../models/cheerups.js');
+var User = require('../models/users.js');
 
 // all routes
 
 // index route - show all cheerups
 router.get('/', function(req, res) {
   Cheerup.find({}, function(err, foundCheerups) {
-    res.render('cheerups/index.ejs', {
-      allCheerups: foundCheerups
+      res.render('cheerups/index.ejs', {
+        allCheerups: foundCheerups
     });
   });
 });
 
 // create route
 router.post('/', function(req, res) {
-  Cheerup.create(req.body, function(err, createdCheerup) {
-    res.redirect('/cheerups');
+  User.findById(req.body.userId, function(err, foundUser) {
+    Cheerup.create(req.body, function(err, createdCheerup) {
+      foundUser.cheerupPage.push(createdCheerup);
+      foundUser.save(function(err, data) {
+        res.redirect('/cheerups');
+      });
+    });
   });
 });
 
 // new route
 router.get('/new', function(req, res) {
-  res.render('cheerups/new.ejs');
+  User.find({}, function(err, allUsers) {
+    res.render('cheerups/new.ejs', {
+      allUsers: allUsers
+    });
+  });
 });
 
 // edit route
