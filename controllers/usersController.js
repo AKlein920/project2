@@ -9,7 +9,8 @@ var Cheerup = require('../models/cheerups.js');
 router.get('/', function(req, res) {
   User.find({}, function(err, foundUsers) {
     res.render('users/index.ejs', {
-      allUsers: foundUsers
+      allUsers: foundUsers,
+      currentUser: req.session.currentuser
     });
   });
 });
@@ -43,9 +44,11 @@ router.put('/:id', function(req, res) {
 });
 
 // delete route
-router.delete('/:id', function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, foundUser) {
-    res.redirect('/users');
+router.delete('/:userId', function(req, res) {
+  User.findByIdAndRemove(req.params.userId, function(err, foundUser) {
+    Cheerup.collection.remove({'userId':req.params.userId}, function(err, foundCheerups) {
+      res.redirect('/cheerups');
+    });
   });
 });
 

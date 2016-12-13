@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var cheerupSchema = new Schema({
-  user: String,
+  userId: String,
   visualmedia: String,
   body: { type: String, maxlength: 139 },
   createdat: { type: Date, required: true, default: Date.now },

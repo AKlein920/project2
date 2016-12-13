@@ -13,3 +13,4 @@ TO WORK ON
 - showing all cheerups of a certain keyword
 - showing a random cheerup's show page ('inspire me button')
 - password encryption
+- log in with Facebook/Google

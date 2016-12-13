@@ -44,9 +44,7 @@ app.use('/sessions', sessionsController);
 
 // root route
 app.get('/', function(req, res) {
-  res.render('cheerups/index.ejs', {
-    currentUser: req.session.currentuser
-  });
+  res.redirect('/cheerups');
 });
 
 // listener

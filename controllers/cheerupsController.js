@@ -12,7 +12,8 @@ var User = require('../models/users.js');
 router.get('/', function(req, res) {
   Cheerup.find({}, function(err, foundCheerups) {
       res.render('cheerups/index.ejs', {
-        allCheerups: foundCheerups
+        allCheerups: foundCheerups,
+        currentUser: req.session.currentuser
     });
   });
 });
@@ -21,6 +22,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   User.findById(req.body.userId, function(err, foundUser) {
     Cheerup.create(req.body, function(err, createdCheerup) {
+      console.log(createdCheerup);
       foundUser.cheerupPage.push(createdCheerup);
       foundUser.save(function(err, data) {
         res.redirect('/cheerups');
