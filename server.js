@@ -3,6 +3,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var session = require('express-session');
 var app = express();
 
 // port
@@ -22,19 +23,30 @@ db.once('open', function() {
 // require the controllers
 var cheerupsController = require('./controllers/cheerupsController.js');
 var usersController = require('./controllers/usersController.js');
+var sessionsController = require('./controllers/sessionsController.js');
 
 // middleware
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// middleware for sessions
+app.use(session({
+  secret: 'feedmeseymour',
+  resave: false,
+  saveUninitialized: false
+}));
+
 // controller middleware
 app.use('/cheerups', cheerupsController);
 app.use('/users', usersController);
+app.use('/sessions', sessionsController);
 
 // root route
 app.get('/', function(req, res) {
-  res.redirect('/cheerups');
+  res.render('cheerups/index.ejs', {
+    currentUser: req.session.currentuser
+  });
 });
 
 // listener
