@@ -7,7 +7,7 @@ var cheerupSchema = new Schema({
   visualmedia: String,
   body: { type: String, maxlength: 139 },
   createdat: { type: Date, required: true, default: Date.now },
-  cheers: Number,
+  cheers: {type: Number, default: 0},
   keywords: Array
 });
 

@@ -27,6 +27,7 @@
             <div class="thumbnail">
               <img src="<%=user.cheerupPage[i].visualmedia%>"/>
               <p><%=user.cheerupPage[i].body%></p>
+              <p>Number of cheers: <%=user.cheerupPage[i].cheers%></p>
               <% if (currentUser.username == user.username) { %>
                 <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>/edit" method="GET">
                   <input type="submit" value="Edit This Cheerup">

@@ -1,5 +1,6 @@
 // set up express Router
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 
 // require the models
@@ -11,9 +12,12 @@ var User = require('../models/users.js');
 // index route - show all cheerups
 router.get('/', function(req, res) {
   Cheerup.find({}, function(err, foundCheerups) {
+    User.find({}, function(err, foundUsers) {
       res.render('cheerups/index.ejs', {
         allCheerups: foundCheerups,
-        currentUser: req.session.currentuser
+        currentUser: req.session.currentuser,
+        users: foundUsers
+      });
     });
   });
 });
@@ -22,7 +26,6 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   User.findById(req.body.userId, function(err, foundUser) {
     Cheerup.create(req.body, function(err, createdCheerup) {
-      console.log(createdCheerup);
       foundUser.cheerupPage.push(createdCheerup);
       foundUser.save(function(err, data) {
         res.redirect('/cheerups');
@@ -78,6 +81,19 @@ router.delete('/:id', function(req, res) {
   });
 });
 
+// cheer button route
+router.put('/:id/cheer', function(req, res) {
+  Cheerup.findByIdAndUpdate(req.params.id, {$inc: {cheers: +1}}, {new: true}, function(err, updatedCheerup) {
+    User.findOne({'cheerupPage._id': req.params.id}, function(err, foundUser) {
+      foundUser.cheerupPage.id(req.params.id).remove();
+      foundUser.cheerupPage.push(updatedCheerup);
+      foundUser.save(function(err, data) {
+        res.redirect('/cheerups');
+      });
+    });
+  });
+});
+
 // show route
 router.get('/:id', function(req, res) {
   Cheerup.findById(req.params.id, function(err, foundCheerup) {
@@ -85,7 +101,8 @@ router.get('/:id', function(req, res) {
       res.render('cheerups/show.ejs', {
         cheerup: foundCheerup,
         user: foundUser,
-        currentUser: req.session.currentuser
+        currentUser: req.session.currentuser,
+        moment: moment
       });
     });
   });

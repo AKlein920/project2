@@ -15,7 +15,7 @@
       <header>
         <nav>
           <ul class='nav nav-tabs'>
-            <li><a href='/'>Back to All Cheerups</a></li>
+            <li><a href='/'>Home</a></li>
             <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
             <% if (currentUser.username === user.username) { %>
               <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit This Cheerup</a></li>
@@ -29,7 +29,7 @@
           <img src="<%=cheerup.visualmedia%>"/>
           <p><%=cheerup.body%></p>
           <p>Created by: <%=user.username%></p>
-          <p>Created on: <%=(cheerup.createdat.getMonth()+1)%>-<%=cheerup.createdat.getDate()%>-<%=cheerup.createdat.getFullYear()%></p>
+          <p>Created on: <%=moment(cheerup.createdat).format('dddd, MMMM Do, YYYY')%></p>
           <p>Number of cheers: <%=cheerup.cheers%></p>
           <% for (var i=0; i<cheerup.keywords.length; i++) { %>
             <p><%=cheerup.keywords[i]%></p>

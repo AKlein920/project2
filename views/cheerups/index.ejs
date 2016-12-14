@@ -21,13 +21,11 @@
         <% if (currentUser) { %>
           <li><a href='/users'>View All Users</a></li>
           <li><a href='cheerups/new'>Add a New Cheerup</a></li>
+          <li><form class="" action="/sessions?_method=DELETE" method="post">
+            <input class='' type="submit" value="Sign Out">
+        </form></li>
         <% } %>
       </ul>
-      <% if (currentUser) { %>
-          <form class="" action="/sessions?_method=DELETE" method="post">
-          <input class='btn btn-default' type="submit" value="Sign Out">
-        </form>
-      <% } %>
     </nav>
   </header>
   <main>
@@ -48,10 +46,21 @@
                 <p><%=allCheerups[i].body%></p>
               <% } else { %>
               <% } %>
+                <% for (var k=0; k<users.length; k++) { %>
+                  <% if (allCheerups[i].userId == users[k]._id) { %>
+                    <p>Created by: <%=users[k].username%></p>
+                  <% } %>
+                <% } %>
+
+                <form class="" action="/cheerups/<%=allCheerups[i]._id%>/cheer?_method=PUT" method="post">
+                    <input type='submit' class="form-control btn btn-primary" value="&hearts; Cheer!" />
+                </form>
+
             </div>
           </div>
         <% } %>
     <% } else { %>
+      <h1>Sign in to interact</h1>
       <% for (var j=0; j<allCheerups.length; j++) { %>
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
@@ -63,6 +72,11 @@
             <% if (allCheerups[j].visualmedia) { %>
               <p><%=allCheerups[j].body%></p>
             <% } else { %>
+            <% } %>
+            <% for (var l=0; l<users.length; l++) { %>
+              <% if (allCheerups[j].userId == users[l]._id) { %>
+                <p>Created by: <%=users[l].username%></p>
+              <% } %>
             <% } %>
           </div>
         </div>
