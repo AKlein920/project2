@@ -113,6 +113,21 @@ router.get('/mostcheered', function(req, res) {
   });
 });
 
+// inspire me route
+router.get('/randomcheerup', function(req, res) {
+  Cheerup.count().exec(function(err, count) {
+    var random = Math.floor(Math.random()*count);
+    Cheerup.findOne().skip(random).exec(function(err, resultCheerup) {
+      User.find({}, function(err, foundUsers) {
+        res.render('cheerups/inspireme.ejs', {
+          randomCheerup: resultCheerup,
+          users: foundUsers
+        });
+      });
+    });
+  });
+});
+
 // show route
 router.get('/:id', function(req, res) {
   Cheerup.findById(req.params.id, function(err, foundCheerup) {

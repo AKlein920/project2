@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="container">
+    <header>
+      <nav>
+        <ul class='nav nav-tabs'>
+          <li><a href="/cheerups">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <form class="" action="/cheerups/randomcheerup" method='get'>
+      <input id='inspire-btn' class='btn btn-lg' type="submit" value="Inspire Me!">
+    </form>
+    <main>
+      <div class="jumbotron">
+        <img src="<%=randomCheerup.visualmedia%>" alt="" />
+        <p><%=randomCheerup.body%></p>
+        <p>Number of Cheers: <%=randomCheerup.cheers%></p>
+        <% for (var i=0; i<users.length; i++) { %>
+          <% if (randomCheerup.userId == users[i]._id) { %>
+            <p>Created by: <a href="/users/<%=users[i]._id%>"><%=users[i].username%></a></p>
+          <% } %>
+        <% } %>
+
+      </div>
+    </main>
+
+  </div>
+  </body>
+</html>
