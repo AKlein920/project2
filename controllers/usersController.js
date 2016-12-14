@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 // create route
 router.post('/', function(req, res) {
   User.create(req.body, function(err, createdUser) {
-    res.redirect('/users');
+    res.redirect('/sessions/new');
   });
 });
 
@@ -31,7 +31,8 @@ router.get('/new', function(req, res) {
 router.get('/:id/edit', function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     res.render('users/edit.ejs', {
-      user: foundUser
+      user: foundUser,
+      currentUser: req.session.currentuser
     });
   });
 });
@@ -47,6 +48,7 @@ router.put('/:id', function(req, res) {
 router.delete('/:userId', function(req, res) {
   User.findByIdAndRemove(req.params.userId, function(err, foundUser) {
     Cheerup.collection.remove({'userId':req.params.userId}, function(err, foundCheerups) {
+      req.session.destroy();
       res.redirect('/cheerups');
     });
   });
@@ -56,7 +58,8 @@ router.delete('/:userId', function(req, res) {
 router.get('/:id', function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     res.render('users/show.ejs', {
-      user: foundUser
+      user: foundUser,
+      currentUser: req.session.currentuser
     });
   });
 });

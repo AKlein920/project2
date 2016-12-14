@@ -14,7 +14,9 @@
           <ul class='nav nav-tabs'>
             <li><a href='/'>Back to All Cheerups</a></li>
             <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
-            <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit This Cheerup</a></li>
+            <% if (currentUser.username === user.username) { %>
+              <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit This Cheerup</a></li>
+            <% } %>
           </ul>
         </nav>
       </header>

@@ -21,34 +21,54 @@
         <% if (currentUser) { %>
           <li><a href='/users'>View All Users</a></li>
           <li><a href='cheerups/new'>Add a New Cheerup</a></li>
-          <li>
-            <form class="" action="/sessions?_method=DELETE" method="post">
-            <input type="submit" value="Sign Out">
-          </form></li>
         <% } %>
       </ul>
+      <% if (currentUser) { %>
+          <form class="" action="/sessions?_method=DELETE" method="post">
+          <input class='btn btn-default' type="submit" value="Sign Out">
+        </form>
+      <% } %>
     </nav>
   </header>
   <main>
     <h1>Cheerups!</h1>
 
-    <% for (var i=0; i<allCheerups.length; i++) { %>
-      <div class='col-sm-6 col-md-4'>
-        <div class="thumbnail">
-          <a href="cheerups/<%=allCheerups[i]._id%>">
-            <% if (allCheerups[i].visualmedia) { %>
-              <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+    <% if (currentUser) { %>
+      <% for (var i = 0; i < allCheerups.length; i++) { %>
+        <div class='col-sm-6 col-md-4'>
+          <div class="thumbnail">
+              <a href="cheerups/<%=allCheerups[i]._id%>">
+                <% if (allCheerups[i].visualmedia) { %>
+                  <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
+                <% } else { %>
+                  <p><%=allCheerups[i].body%></p>
+                <% } %>
+              </a>
+              <% if (allCheerups[i].visualmedia) { %>
+                <p><%=allCheerups[i].body%></p>
+              <% } else { %>
+              <% } %>
+            </div>
+          </div>
+        <% } %>
+    <% } else { %>
+      <% for (var j=0; j<allCheerups.length; j++) { %>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <% if (allCheerups[j].visualmedia) { %>
+              <img src="<%=allCheerups[j].visualmedia%>" alt="" />
             <% } else { %>
-              <p><%=allCheerups[i].body%></p>
+              <p><%=allCheerups[j].body%></p>
             <% } %>
-          </a>
-          <% if (allCheerups[i].visualmedia) { %>
-            <p><%=allCheerups[i].body%></p>
-          <% } else { %>
-          <% } %>
+            <% if (allCheerups[j].visualmedia) { %>
+              <p><%=allCheerups[j].body%></p>
+            <% } else { %>
+            <% } %>
+          </div>
         </div>
-      </div>
+      <% } %>
     <% } %>
+
   </main>
 
 

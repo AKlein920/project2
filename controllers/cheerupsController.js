@@ -35,7 +35,8 @@ router.post('/', function(req, res) {
 router.get('/new', function(req, res) {
   User.find({}, function(err, allUsers) {
     res.render('cheerups/new.ejs', {
-      allUsers: allUsers
+      allUsers: allUsers,
+      currentUser: req.session.currentuser
     });
   });
 });
@@ -83,7 +84,8 @@ router.get('/:id', function(req, res) {
     User.findOne({'cheerupPage._id':req.params.id}, function(err, foundUser) {
       res.render('cheerups/show.ejs', {
         cheerup: foundCheerup,
-        user: foundUser
+        user: foundUser,
+        currentUser: req.session.currentuser
       });
     });
   });

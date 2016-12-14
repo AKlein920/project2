@@ -12,7 +12,7 @@
   <header>
     <nav>
       <ul class='nav nav-tabs'>
-        <li><a href='/'>Back to All Cheerups</a></li>
+        <li><a href='/'>Home</a></li>
       </ul>
     </nav>
   </header>
@@ -24,7 +24,10 @@
       <select class="form-control" name="userId">
         <option>Select a User</option>
         <% for (var i=0; i<allUsers.length; i++) { %>
-          <option value="<%=allUsers[i]._id%>"><%=allUsers[i].username%></option>
+          <% if (currentUser.username == allUsers[i].username) { %>
+            <option value="<%=allUsers[i]._id%>"><%=currentUser.username%></option>
+          <% } %>
+
         <% } %>
       </select>
       <input class='form-control' type="text" name="visualmedia" value="Image, gif, or video URL">
