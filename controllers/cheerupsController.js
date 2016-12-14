@@ -15,8 +15,8 @@ router.get('/', function(req, res) {
     User.find({}, function(err, foundUsers) {
       res.render('cheerups/index.ejs', {
         allCheerups: foundCheerups,
-        currentUser: req.session.currentuser,
-        users: foundUsers
+        users: foundUsers,
+        currentUser: req.session.currentuser
       });
     });
   });
@@ -89,6 +89,25 @@ router.put('/:id/cheer', function(req, res) {
       foundUser.cheerupPage.push(updatedCheerup);
       foundUser.save(function(err, data) {
         res.redirect('/cheerups');
+      });
+    });
+  });
+});
+
+// cheer keyword route
+// router.get('/keyword', function(req, res) {
+//   Cheerup.find({}, function(err, foundCheerups) {
+//     res.send(foundCheerups);
+//   });
+// });
+
+// most cheered route
+router.get('/mostcheered', function(req, res) {
+  User.find({}, function(err, foundUsers) {
+    Cheerup.aggregate([{$sort: {cheers: -1}}], function(err, sortedFoundCheers) {
+      res.render('cheerups/mostcheered.ejs', {
+        cheerups: sortedFoundCheers,
+        users: foundUsers
       });
     });
   });

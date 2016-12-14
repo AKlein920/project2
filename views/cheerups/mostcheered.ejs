@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <header>
+        <nav>
+          <ul class='nav nav-tabs'>
+            <li><a href='/'>Home</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <% for (var i=0; i<cheerups.length; i++) { %>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <a href="/cheerups/<%=cheerups[i]._id%>"><img src="<%=cheerups[i].visualmedia%>" alt="" /></a>
+            <p><%=cheerups[i].body%></p>
+            <p>Number of cheers: <%=cheerups[i].cheers%></p>
+            <% for (var j=0; j<users.length; j++) { %>
+              <% if (cheerups[i].userId == users[j]._id) { %>
+                  <p>Created by: <a href="/users/<%=users[j]._id%>"><%=users[j].username%></a></p>
+                <% } %>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

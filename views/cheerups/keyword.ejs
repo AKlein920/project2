@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+
+
+    <header>
+      <nav>
+        <ul class='nav nav-tabs'>
+          <li><a href="/cheerups">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <% for (var i=0; i<cheerups.length; i++) { %>
+        <h1><%=cheerups[i].visualmedia%></h1>
+      <% } %>
+    </main>
+
+  </div>
+  </body>
+</html>

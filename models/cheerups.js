@@ -8,7 +8,7 @@ var cheerupSchema = new Schema({
   body: { type: String, maxlength: 139 },
   createdat: { type: Date, required: true, default: Date.now },
   cheers: {type: Number, default: 0},
-  keywords: Array
+  keywords: [String]
 });
 
 var Cheerup = mongoose.model('Cheerup', cheerupSchema);

@@ -20,6 +20,7 @@
 
         <% if (currentUser) { %>
           <li><a href='/users'>View All Users</a></li>
+          <li><a href="cheerups/mostcheered">View by Most Cheered</a></li>
           <li><a href='cheerups/new'>Add a New Cheerup</a></li>
           <li><form class="" action="/sessions?_method=DELETE" method="post">
             <input class='' type="submit" value="Sign Out">
@@ -48,8 +49,12 @@
               <% } %>
                 <% for (var k=0; k<users.length; k++) { %>
                   <% if (allCheerups[i].userId == users[k]._id) { %>
-                    <p>Created by: <%=users[k].username%></p>
+                    <p>Created by: <a href="/users/<%=users[k]._id%>"><%=users[k].username%></a></p>
                   <% } %>
+                <% } %>
+                <p>Current number of cheers: <%=allCheerups[i].cheers%></p>
+                <% for (var m=0; m<allCheerups[i].keywords.length; m++) { %>
+                  <p><%=allCheerups[i].keywords[m]%></p>
                 <% } %>
 
                 <form class="" action="/cheerups/<%=allCheerups[i]._id%>/cheer?_method=PUT" method="post">
@@ -77,6 +82,10 @@
               <% if (allCheerups[j].userId == users[l]._id) { %>
                 <p>Created by: <%=users[l].username%></p>
               <% } %>
+            <% } %>
+            <p>Current number of cheers: <%=allCheerups[j].cheers%></p>
+            <% for (var n=0; n<allCheerups[j].keywords.length; n++) { %>
+              <p><%=allCheerups[j].keywords[n]%></p>
             <% } %>
           </div>
         </div>
