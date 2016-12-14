@@ -7,6 +7,7 @@ MUST FIX
 - ~~character limit on body seemingly not working~~ FIXED
 - visualmedia vs. img OR iframe in schema
 - ~~when logged in, the 'register' link shouldn't show; 'log out' link should show~~ FIXED
+- ~~'created on' should look way prettier~~ FIXED
 
 
 TO WORK ON

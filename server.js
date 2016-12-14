@@ -29,6 +29,7 @@ var sessionsController = require('./controllers/sessionsController.js');
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 // middleware for sessions
 app.use(session({
