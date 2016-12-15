@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
+<link rel="stylesheet" href="/style.css" media="screen" title="no title">
 
 <script type="text/javascript" src='/app.js'></script>
     <title></title>
   </head>
   <body>
 
-<div class="container">
+
   <header>
     <nav>
-      <ul class='nav nav-tabs'>
+      <ul class='nav nav-justified'>
         <li><a href='/cheerups'>Home</a></li>
         <% if (!currentUser) { %>
           <li><a href="/users/new">Register</a></li>
@@ -25,58 +27,55 @@
           <li><a href="cheerups/mostcheered">View by Most Cheered</a></li>
           <li><a href='cheerups/new'>Add a New Cheerup</a></li>
           <li><form class="" action="/sessions?_method=DELETE" method="post">
-            <input class='' type="submit" value="Sign Out">
+            <input class='navbar-link' type="submit" value="Sign Out">
         </form></li>
         <% } %>
       </ul>
     </nav>
   </header>
   <main>
-    <h1>Cheerups!</h1>
+    <h1 id='title'>Cheerups!</h1>
     <% if (currentUser) { %>
       <form class="" action="cheerups/randomcheerup" method='get'>
-        <input id='inspire-btn' class='btn btn-lg' type="submit" value="Inspire Me!">
+        <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
       </form>
     <% } %>
 
-
+    <div class="cheerupsBox">
     <% if (currentUser) { %>
       <% for (var i = 0; i < allCheerups.length; i++) { %>
-        <div class='col-sm-6 col-md-4'>
-          <div class="thumbnail">
-              <a href="cheerups/<%=allCheerups[i]._id%>">
-                <% if (allCheerups[i].visualmedia) { %>
-                  <img src="<%=allCheerups[i].visualmedia%>" alt=""/>
-                <% } else { %>
-                  <p><%=allCheerups[i].body%></p>
-                <% } %>
-              </a>
-              <% if (allCheerups[i].visualmedia) { %>
-                <p><%=allCheerups[i].body%></p>
-              <% } else { %>
-              <% } %>
-                <% for (var k=0; k<users.length; k++) { %>
-                  <% if (allCheerups[i].userId == users[k]._id) { %>
-                    <p>Created by: <a href="/users/<%=users[k]._id%>"><%=users[k].username%></a></p>
+              <div class="cheerupContainer">
+                <a href="cheerups/<%=allCheerups[i]._id%>">
+                  <% if (allCheerups[i].visualmedia) { %>
+                    <img class='cheerupImgs img-rounded' src="<%=allCheerups[i].visualmedia%>" alt=""/>
+                  <% } else { %>
+                    <p><%=allCheerups[i].body%></p>
                   <% } %>
+                </a>
+                <% if (allCheerups[i].visualmedia) { %>
+                  <p id='cheerup-body'><%=allCheerups[i].body%></p>
+                <% } else { %>
                 <% } %>
-                <p>Current number of cheers: <%=allCheerups[i].cheers%></p>
-                <% for (var m=0; m<allCheerups[i].keywords.length; m++) { %>
-                  <p><%=allCheerups[i].keywords[m]%></p>
-                <% } %>
+                  <% for (var k=0; k<users.length; k++) { %>
+                    <% if (allCheerups[i].userId == users[k]._id) { %>
+                      <p id='cheerup-author'>Created by: <a href="/users/<%=users[k]._id%>"><%=users[k].username%></a></p>
+                    <% } %>
+                  <% } %>
+                  <p id='cheerup-cheers'>Cheers: <span class='badge'><%=allCheerups[i].cheers%></span></p>
+                  <% for (var m=0; m<allCheerups[i].keywords.length; m++) { %>
+                    <p class='cheerup-keywords'><%=allCheerups[i].keywords[m]%></p>
+                  <% } %>
 
-                <form class="" action="/cheerups/<%=allCheerups[i]._id%>/cheer?_method=PUT" method="post">
-                    <input type='submit' class="form-control btn btn-primary" value="&hearts; Cheer!" />
-                </form>
-
+                  <form action="/cheerups/<%=allCheerups[i]._id%>/cheer?_method=PUT" method="post">
+                      <input id='cheer-btn' type='submit' class="btn btn-default" value="&hearts; Cheer!" />
+                  </form>
             </div>
-          </div>
         <% } %>
     <% } else { %>
       <h1>Sign in to interact</h1>
       <% for (var j=0; j<allCheerups.length; j++) { %>
-        <div class="col-sm-6 col-md-4">
-          <div class="thumbnail">
+        <div class="">
+          <div class="">
             <% if (allCheerups[j].visualmedia) { %>
               <img src="<%=allCheerups[j].visualmedia%>" alt="" />
             <% } else { %>
@@ -91,19 +90,20 @@
                 <p>Created by: <%=users[l].username%></p>
               <% } %>
             <% } %>
-            <p>Current number of cheers: <%=allCheerups[j].cheers%></p>
+            <p>Current number of cheers: <span class='badge'><%=allCheerups[j].cheers%></span></p>
             <% for (var n=0; n<allCheerups[j].keywords.length; n++) { %>
               <p><%=allCheerups[j].keywords[n]%></p>
             <% } %>
           </div>
         </div>
+      </div>
       <% } %>
     <% } %>
 
   </main>
 
 
-</div>
+
 
 
 

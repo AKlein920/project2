@@ -13,6 +13,6 @@ MUST FIX
 TO WORK ON
 - showing all cheerups of a certain keyword
 - ~~upvote/cheer button~~ Made a route to sort cheerups by number of cheers and display them in descending order!
-- showing a random cheerup's show page ('inspire me button')
+- ~~showing a random cheerup's show page~~ ('inspire me button')
 - password encryption
 - log in with Facebook/Google
