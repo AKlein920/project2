@@ -4,29 +4,44 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/cheerupindexstyle.css" media="screen" title="no title">
     <title></title>
   </head>
   <body>
 
+    <header>
+      <div id='title-container'>
+        <h1 id='title'>Cheerups</h1>
+          <form id='inspire-btn-container' action="/cheerups/randomcheerup" method='get'>
+            <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
+          </form>
+      </div>
+
+      <nav>
+        <ul class='nav nav-justified'>
+          <li><a href='/cheerups'>Home</a></li>
+          <li><a href='/users'>View All Users</a></li>
+          <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
+          <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+          <li><form class="" action="/sessions?_method=DELETE" method="post">
+            <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
+          </form></li>
+        </ul>
+      </nav>
+    </header>
+
     <div class="container">
-      <header>
-        <nav>
-          <ul class='nav nav-tabs'>
-            <li><a href="/cheerups">Home</a></li>
-            <% if (!currentUser) { %>
-              <li><a href="/users/new">Register</a></li>
-              <li><a href="/sessions/new">Sign In</a></li>
-            <% } %>
-          </ul>
-        </nav>
-      </header>
       <main>
-        <h1>All Users</h1>
-        <% for (var i=0; i<allUsers.length; i++) { %>
-          <div class="thumbnail">
-            <a href="/users/<%=allUsers[i]._id%>"><%=allUsers[i].username%></a>
-          </div>
-        <% } %>
+        <h1><strong>Find all Cheerups by User</strong></h1>
+        <div class="list-container">
+          <ul class='list-group'>
+          <% for (var i=0; i<allUsers.length; i++) { %>
+              <a href="/users/<%=allUsers[i]._id%>"><li class='list-group-item'><%=allUsers[i].username%></li></a>
+              <br/>
+          <% } %>
+          </ul>
+        </div>
       </main>
     </div>
 

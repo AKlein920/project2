@@ -57,6 +57,7 @@ nav ul li a {
   background-color: #dcb239;
   box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.35);
   color: #ffffff;
+  border: 1px solid #dcb239;
   margin-bottom: 2px;
 }
 
@@ -93,7 +94,7 @@ nav ul li a {
 }
 
 .cheerupImgs {
-  height: 60%;
+  height: 55%;
   max-width: 95%;
   margin-top: 3%;
 }
@@ -107,7 +108,7 @@ nav ul li a {
   display: inline-block;
   margin: 0 auto;
   text-align: left;
-  max-width: 40%;
+  max-width: 80%;
   margin-right: 1%;
   font-size: 1em;
 }
@@ -116,7 +117,7 @@ nav ul li a {
   display: inline-block;
   margin: 0 auto;
   text-align: right;
-  max-width: 40%;
+  max-width: 18%;
   margin-left: 1%;
   font-size: 1em;
 }
@@ -126,9 +127,45 @@ nav ul li a {
 }
 
 #cheer-btn {
-  margin: 0 auto;
+  margin: 0;
   color: #808080;
   background-color: #fedcd2;
   box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.35);
   border: 1px solid #fedcd2;
+}
+
+.list-container {
+  text-align: center;
+}
+
+.list-container a {
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #df744a;
+}
+
+.list-container li:hover {
+  background-color: #fedcd2;
+}
+
+#user-heading {
+  margin: 0 auto;
+  margin-top: 1%;
+  text-align: center;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+#register-message {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+#info {
+  max-width: 80%;
 }

@@ -4,46 +4,58 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/cheerupindexstyle.css" media="screen" title="no title">
     <title></title>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <nav>
-          <ul class='nav nav-tabs'>
-            <li><a href='/cheerups'>Home</a></li>
-            <li><a href="/users">Back to All Users</a></li>
-            <% if (currentUser.username == user.username) { %>
-              <li><a href="/users/<%=user._id%>/edit">Edit My Info</a></li>
-              <li><a href="/cheerups/new">Add a New Cheerup</a></li>
-            <% } %>
-          </ul>
-        </nav>
-      </header>
+
+    <header>
+      <div id='title-container'>
+        <h1 id='title'>Cheerups</h1>
+          <form id='inspire-btn-container' action="/cheerups/randomcheerup" method='get'>
+            <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
+          </form>
+      </div>
+
+      <nav>
+        <ul class='nav nav-justified'>
+          <li><a href='/cheerups'>Home</a></li>
+          <li><a href='/users'>View All Users</a></li>
+          <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
+          <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+          <li><form class="" action="/sessions?_method=DELETE" method="post">
+            <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
+          </form></li>
+        </ul>
+      </nav>
+    </header>
+
       <main>
-        <h1><%=user.username%></h1>
-        <% for (var i=0; i<user.cheerupPage.length; i++) { %>
-          <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-              <img src="<%=user.cheerupPage[i].visualmedia%>"/>
-              <p><%=user.cheerupPage[i].body%></p>
-              <p>Number of cheers: <%=user.cheerupPage[i].cheers%></p>
-              <% if (currentUser.username == user.username) { %>
-                <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>/edit" method="GET">
-                  <input type="submit" value="Edit This Cheerup">
-                </form>
-                <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>?_method=DELETE" method="POST">
-                  <input type="submit" value="Delete This Cheerup">
-                </form>
-              <% } %>
+        <h1 id='user-heading'><strong><%=user.username%>'s Cheerups</strong></h1>
+        <div class="cheerupsBox">
+          <% for (var i=0; i<user.cheerupPage.length; i++) { %>
+            <div class="cheerupContainer">
+                <img class='cheerupImgs img-rounded' src="<%=user.cheerupPage[i].visualmedia%>"/>
+                <p><%=user.cheerupPage[i].body%></p>
+                <p>Created on <%=moment(user.cheerupPage[i].createdat).format('dddd, MMMM Do, YYYY')%></p>
+
+                  <div class="btnContainer">
+                    <% if (currentUser.username == user.username) { %>
+                      <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>/edit" method="GET">
+                        <input id='sign-out-btn' class='btn btn-primary' type="submit" value="Edit">
+                      </form>
+                      <form class="" action="/cheerups/<%=user.cheerupPage[i]._id%>?_method=DELETE" method="POST">
+                        <input id='sign-out-btn' class='btn btn-primary' type="submit" value="Delete">
+                      </form>
+                      <% } %>
+                    <p><span class='glyphicon glyphicon-heart'></span><%=user.cheerupPage[i].cheers%></p>
+                  </div>
 
             </div>
-          </div>
-        <% } %>
-
+          <% } %>
+        </div>
       </main>
-
-    </div>
 
   </body>
 </html>

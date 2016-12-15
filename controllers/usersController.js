@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 
 // models
@@ -59,7 +60,8 @@ router.get('/:id', function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     res.render('users/show.ejs', {
       user: foundUser,
-      currentUser: req.session.currentuser
+      currentUser: req.session.currentuser,
+      moment: moment
     });
   });
 });
