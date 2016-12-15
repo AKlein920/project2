@@ -107,7 +107,8 @@ router.get('/mostcheered', function(req, res) {
     Cheerup.aggregate([{$sort: {cheers: -1}}], function(err, sortedFoundCheers) {
       res.render('cheerups/mostcheered.ejs', {
         cheerups: sortedFoundCheers,
-        users: foundUsers
+        users: foundUsers,
+        moment: moment
       });
     });
   });
@@ -121,7 +122,8 @@ router.get('/randomcheerup', function(req, res) {
       User.find({}, function(err, foundUsers) {
         res.render('cheerups/inspireme.ejs', {
           randomCheerup: resultCheerup,
-          users: foundUsers
+          users: foundUsers,
+          moment: moment
         });
       });
     });

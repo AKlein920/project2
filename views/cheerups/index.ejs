@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
-<link rel="stylesheet" href="/style.css" media="screen" title="no title">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/cheerupindexstyle.css" media="screen" title="no title">
 
 <script type="text/javascript" src='/app.js'></script>
     <title></title>
@@ -14,6 +14,15 @@
 
 
   <header>
+    <div id='title-container'>
+      <h1 id='title'>Cheerups</h1>
+      <% if (currentUser) { %>
+        <form id='inspire-btn-container' action="cheerups/randomcheerup" method='get'>
+          <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
+        </form>
+      <% } %>
+    </div>
+
     <nav>
       <ul class='nav nav-justified'>
         <li><a href='/cheerups'>Home</a></li>
@@ -24,22 +33,18 @@
 
         <% if (currentUser) { %>
           <li><a href='/users'>View All Users</a></li>
-          <li><a href="cheerups/mostcheered">View by Most Cheered</a></li>
+          <li><a href="cheerups/mostcheered">Most Cheered</a></li>
           <li><a href='cheerups/new'>Add a New Cheerup</a></li>
           <li><form class="" action="/sessions?_method=DELETE" method="post">
-            <input class='navbar-link' type="submit" value="Sign Out">
+            <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
         </form></li>
         <% } %>
       </ul>
     </nav>
   </header>
+
   <main>
-    <h1 id='title'>Cheerups!</h1>
-    <% if (currentUser) { %>
-      <form class="" action="cheerups/randomcheerup" method='get'>
-        <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
-      </form>
-    <% } %>
+
 
     <div class="cheerupsBox">
     <% if (currentUser) { %>
@@ -61,7 +66,7 @@
                       <p id='cheerup-author'>Created by: <a href="/users/<%=users[k]._id%>"><%=users[k].username%></a></p>
                     <% } %>
                   <% } %>
-                  <p id='cheerup-cheers'>Cheers: <span class='badge'><%=allCheerups[i].cheers%></span></p>
+                  <p id='cheerup-cheers'><span class='glyphicon glyphicon-heart'></span><%=allCheerups[i].cheers%></p>
                   <% for (var m=0; m<allCheerups[i].keywords.length; m++) { %>
                     <p class='cheerup-keywords'><%=allCheerups[i].keywords[m]%></p>
                   <% } %>
@@ -71,33 +76,36 @@
                   </form>
             </div>
         <% } %>
+      </div>
+
     <% } else { %>
       <h1>Sign in to interact</h1>
+
+      <div class="cheerupsBox">
       <% for (var j=0; j<allCheerups.length; j++) { %>
-        <div class="">
-          <div class="">
+        <div class="cheerupContainer">
             <% if (allCheerups[j].visualmedia) { %>
-              <img src="<%=allCheerups[j].visualmedia%>" alt="" />
+              <img class='cheerupImgs img-rounded' src="<%=allCheerups[j].visualmedia%>" alt="" />
             <% } else { %>
               <p><%=allCheerups[j].body%></p>
             <% } %>
             <% if (allCheerups[j].visualmedia) { %>
-              <p><%=allCheerups[j].body%></p>
+              <p id='cheerup-body'><%=allCheerups[j].body%></p>
             <% } else { %>
             <% } %>
             <% for (var l=0; l<users.length; l++) { %>
               <% if (allCheerups[j].userId == users[l]._id) { %>
-                <p>Created by: <%=users[l].username%></p>
+                <p id='cheerup-author'>Created by: <%=users[l].username%></p>
               <% } %>
             <% } %>
-            <p>Current number of cheers: <span class='badge'><%=allCheerups[j].cheers%></span></p>
+            <p id='cheerup-cheers'><span class='glyphicon glyphicon-heart'></span> <span><%=allCheerups[j].cheers%></span></p>
             <% for (var n=0; n<allCheerups[j].keywords.length; n++) { %>
-              <p><%=allCheerups[j].keywords[n]%></p>
+              <p class='cheerup-keywords'><%=allCheerups[j].keywords[n]%></p>
             <% } %>
-          </div>
         </div>
-      </div>
       <% } %>
+      </div>
+
     <% } %>
 
   </main>

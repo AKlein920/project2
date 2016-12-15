@@ -4,31 +4,49 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/cheerupshowstyle.css" media="screen" title="no title">
     <title></title>
   </head>
   <body>
 
-    <div class="container">
     <header>
+      <div id='title-container'>
+        <h1 id='title'>Cheerups</h1>
+      </div>
+
       <nav>
-        <ul class='nav nav-tabs'>
-          <li><a href="/cheerups">Home</a></li>
+        <ul class='nav nav-justified'>
+          <li><a href='/cheerups'>Home</a></li>
+            <li><a href='/users'>View All Users</a></li>
+            <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
+            <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+            <li><form class="" action="/sessions?_method=DELETE" method="post">
+              <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
+          </form></li>
+
         </ul>
       </nav>
     </header>
+  </br>
 
     <form class="" action="/cheerups/randomcheerup" method='get'>
-      <input id='inspire-btn' class='btn btn-lg' type="submit" value="Inspire Me!">
+      <input id='inspire-btn' class='btn btn-lg' type="submit" value="Inspire Me Again!">
     </form>
+    <br/>
+
     <main>
-      <div class="jumbotron">
-        <img src="<%=randomCheerup.visualmedia%>" alt="" />
+      <div class="cheerupContainer">
+        <a href="/cheerups/<%=randomCheerup._id%>"><img class='cheerupImgs img-rounded' src="<%=randomCheerup.visualmedia%>" alt="" /></a>
         <p><%=randomCheerup.body%></p>
-        <p>Number of Cheers: <%=randomCheerup.cheers%></p>
         <% for (var i=0; i<users.length; i++) { %>
           <% if (randomCheerup.userId == users[i]._id) { %>
-            <p>Created by: <a href="/users/<%=users[i]._id%>"><%=users[i].username%></a></p>
+            <p>Created by <a href="/users/<%=users[i]._id%>"><%=users[i].username%></a> on <%=moment(randomCheerup.createdat).format('dddd, MMMM Do, YYYY')%></p>
           <% } %>
+        <% } %>
+        <p id='cheerup-cheers'><span class='glyphicon glyphicon-heart'></span><%=randomCheerup.cheers%></p>
+        <% for (var m=0; m<randomCheerup.keywords.length; m++) { %>
+          <p class='cheerup-keywords'><%=randomCheerup.keywords[m]%></p>
         <% } %>
 
       </div>

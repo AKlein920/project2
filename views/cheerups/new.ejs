@@ -4,40 +4,52 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/newcheerupstyle.css" media="screen" title="no title">
     <title></title>
   </head>
   <body>
 
-<div class="container">
-  <header>
-    <nav>
-      <ul class='nav nav-tabs'>
-        <li><a href='/'>Home</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <h1>Create a New Cheerup</h1>
+    <header>
+      <div id='title-container'>
+        <h1 id='title'>Cheerups</h1>
+          <form id='inspire-btn-container' action="/cheerups/randomcheerup" method='get'>
+            <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
+          </form>
+      </div>
 
-  <div class="form-group">
-    <form class="" action="/cheerups" method="POST">
-      <select class="form-control" name="userId">
-        <option>Select a User</option>
-        <% for (var i=0; i<allUsers.length; i++) { %>
-          <% if (currentUser.username == allUsers[i].username) { %>
-            <option value="<%=allUsers[i]._id%>"><%=currentUser.username%></option>
+      <nav>
+        <ul class='nav nav-justified'>
+          <li><a href='/cheerups'>Home</a></li>
+          <li><a href='/users'>View All Users</a></li>
+          <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
+          <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+          <li><form class="" action="/sessions?_method=DELETE" method="post">
+            <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
+          </form></li>
+        </ul>
+      </nav>
+    </header>
+
+<main>
+  <div class="container">
+    <h1><strong>Create a New Cheerup</strong></h1>
+    <div class="form-group">
+      <form class="" action="/cheerups" method="POST">
+          <% for (var i=0; i<allUsers.length; i++) { %>
+            <% if (currentUser.username == allUsers[i].username) { %>
+              <input class='form-control' type="hidden" name='userId' value='<%=allUsers[i]._id%>'/>
+            <% } %>
           <% } %>
-
-        <% } %>
-      </select>
-      <input class='form-control' type="text" name="visualmedia" value="Image, gif, or video URL">
-      <input class='form-control' type="text" name="body" value="Text" maxlength='139'>
-      <input class='form-control' type="text" name="keywords" value="#Keywords">
-      <input type="submit" value="Create Me!">
-    </form>
-
+        <input class='form-control' type="text" name="visualmedia" value="Image or GIF URL"/>
+        <input class='form-control' type="text" name="body" value="139 characters to play with" maxlength='139'/>
+        <input class='form-control' type="text" name="keywords" value="#Keywords separated by a space"/>
+        <input id='submit-new-cheer' class='btn btn-primary' type="submit" value="Create Me!"/>
+      </form>
+    </div>
   </div>
-</div>
+</main>
 
   </body>
 </html>
