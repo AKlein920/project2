@@ -32,9 +32,11 @@
         <% } %>
 
         <% if (currentUser) { %>
-          <li><a href='/users'>View All Users</a></li>
+          <li><a href='/users'>All Users</a></li>
           <li><a href="cheerups/mostcheered">Most Cheered</a></li>
-          <li><a href='cheerups/new'>Add a New Cheerup</a></li>
+          <li><a href='cheerups/new'>Add Cheerup</a></li>
+          <li><a href="/users/<%=currentUser._id%>">My Cheerups</a></li>
+          <li><a href="/users/<%=currentUser._id%>/edit">My Account</a></li>
           <li><form class="" action="/sessions?_method=DELETE" method="post">
             <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
         </form></li>

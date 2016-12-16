@@ -21,9 +21,11 @@
       <nav>
         <ul class='nav nav-justified'>
           <li><a href='/cheerups'>Home</a></li>
-          <li><a href='/users'>View All Users</a></li>
+          <li><a href='/users'>All Users</a></li>
           <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
-          <li><a href='/cheerups/new'>Add a New Cheerup</a></li>
+          <li><a href='/cheerups/new'>Add Cheerup</a></li>
+          <li><a href="/users/<%=currentUser._id%>">My Cheerups</a></li>
+          <li><a href="/users/<%=currentUser._id%>/edit">My Account</a></li>
           <li><form class="" action="/sessions?_method=DELETE" method="post">
             <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
           </form></li>
@@ -37,8 +39,11 @@
           <% for (var i=0; i<user.cheerupPage.length; i++) { %>
             <div class="cheerupContainer">
                 <img class='cheerupImgs img-rounded' src="<%=user.cheerupPage[i].visualmedia%>"/>
-                <p><%=user.cheerupPage[i].body%></p>
+                <p id='cheerup-body'><%=user.cheerupPage[i].body%></p>
                 <p>Created on <%=moment(user.cheerupPage[i].createdat).format('dddd, MMMM Do, YYYY')%></p>
+                <% for (var j=0; j<user.cheerupPage[i].keywords.length; j++) { %>
+                  <p id='cheeerup-keywords'><%=user.cheerupPage[i].keywords[j]%></p>
+                <% } %>
 
                   <div class="btnContainer">
                     <% if (currentUser.username == user.username) { %>

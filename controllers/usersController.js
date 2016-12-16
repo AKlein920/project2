@@ -8,7 +8,7 @@ var Cheerup = require('../models/cheerups.js');
 
 // index route - show all users
 router.get('/', function(req, res) {
-  User.find({}, function(err, foundUsers) {
+  User.aggregate({$sort: {username: 1}}, function(err, foundUsers) {
     res.render('users/index.ejs', {
       allUsers: foundUsers,
       currentUser: req.session.currentuser

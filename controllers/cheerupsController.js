@@ -50,7 +50,8 @@ router.get('/:id/edit', function(req, res) {
     User.find({}, function(err, allUsers) {
       res.render('cheerups/edit.ejs', {
         cheerup: foundCheerup,
-        allUsers: allUsers
+        allUsers: allUsers,
+        currentUser: req.session.currentuser
       });
     });
   });
@@ -75,7 +76,7 @@ router.delete('/:id', function(req, res) {
     User.findOne({'cheerupPage._id':req.params.id}, function(err, foundUser) {
       foundUser.cheerupPage.id(req.params.id).remove();
       foundUser.save(function(err, data) {
-        res.redirect('/cheerups');
+        res.redirect('/users/'+foundUser.id);
       });
     });
   });
@@ -89,6 +90,19 @@ router.put('/:id/cheer', function(req, res) {
       foundUser.cheerupPage.push(updatedCheerup);
       foundUser.save(function(err, data) {
         res.redirect('/cheerups');
+      });
+    });
+  });
+});
+
+// cheer button route - redirecting to inspireme page
+router.put('/:id/cheer/inspireme', function(req, res) {
+  Cheerup.findByIdAndUpdate(req.params.id, {$inc: {cheers: +1}}, {new: true}, function(err, updatedCheerup) {
+    User.findOne({'cheerupPage._id': req.params.id}, function(err, foundUser) {
+      foundUser.cheerupPage.id(req.params.id).remove();
+      foundUser.cheerupPage.push(updatedCheerup);
+      foundUser.save(function(err, data) {
+        res.redirect('/cheerups/randomcheerup');
       });
     });
   });
@@ -108,7 +122,8 @@ router.get('/mostcheered', function(req, res) {
       res.render('cheerups/mostcheered.ejs', {
         cheerups: sortedFoundCheers,
         users: foundUsers,
-        moment: moment
+        moment: moment,
+        currentUser: req.session.currentuser
       });
     });
   });
@@ -123,7 +138,8 @@ router.get('/randomcheerup', function(req, res) {
         res.render('cheerups/inspireme.ejs', {
           randomCheerup: resultCheerup,
           users: foundUsers,
-          moment: moment
+          moment: moment,
+          currentUser: req.session.currentuser
         });
       });
     });

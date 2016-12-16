@@ -4,32 +4,50 @@
     <meta charset="utf-8">
     <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="/newcheerupstyle.css" media="screen" title="no title">
     <title></title>
   </head>
   <body>
-<div class="container">
-  <header>
-    <nav>
-      <ul class="nav nav-tabs">
-        <li><a href="/cheerups">Home</a></li>
-        <li><a href="/users/<%=user._id%>">Back to My User Page</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h1>Edit My Info</h1>
 
-    <div class="form-group">
-      <form class="" action="/users/<%=user._id%>?_method=PUT" method="POST">
-        <input class='form-control' type="text" name="username" value="<%=user.username%>">
-        <input class='form-control' type="text" name="password" value="<%=user.password%>">
-        <input type="submit" value="Edit My Profile">
-      </form>
+    <header>
+      <div id='title-container'>
+        <h1 id='title'>Cheerups</h1>
+          <form id='inspire-btn-container' action="/cheerups/randomcheerup" method='get'>
+            <button id='inspire-btn' class='btn btn-primary' type="submit" value="">Inspire Me!</button>
+          </form>
+      </div>
 
-      <form class="" action="/users/<%=user._id%>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete My Account">
-      </form>
-  </main>
-</div>
+      <nav>
+        <ul class='nav nav-justified'>
+          <li><a href='/cheerups'>Home</a></li>
+          <li><a href='/users'>All Users</a></li>
+          <li><a href="/cheerups/mostcheered">Most Cheered</a></li>
+          <li><a href='/cheerups/new'>Add Cheerup</a></li>
+          <li><a href="/users/<%=currentUser._id%>">My Cheerups</a></li>
+          <li><a href="/users/<%=currentUser._id%>/edit">My Account</a></li>
+          <li><form class="" action="/sessions?_method=DELETE" method="post">
+            <input id='sign-out-btn' class='navbar-link btn' type="submit" value="Sign Out">
+          </form></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <main>
+        <h1><strong>Edit My Info</strong></h1>
+        <div class="form-group">
+          <form class="" action="/users/<%=user._id%>?_method=PUT" method="POST">
+            <input class='form-control' type="text" name="username" value="<%=user.username%>">
+            <input class='form-control' type="text" name="password" value="<%=user.password%>">
+            <input id='submit-new-cheer' class='btn btn-primary' type="submit" value="Edit My Profile">
+          </form>
+
+          <form class="" action="/users/<%=user._id%>?_method=DELETE" method="POST">
+            <input id='submit-new-cheer' class='btn btn-primary' type="submit" value="Delete My Account">
+          </form>
+      </main>
+    </div>
+
   </body>
 </html>
