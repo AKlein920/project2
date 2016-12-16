@@ -26,7 +26,8 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   User.findById(req.body.userId, function(err, foundUser) {
     Cheerup.create(req.body, function(err, createdCheerup) {
-      req.body.keywords = req.body.keywords.split(' ');
+      var keywords = req.body.keywords.split(' ');
+      createdCheerup.keywords = keywords;
       foundUser.cheerupPage.push(createdCheerup);
       foundUser.save(function(err, data) {
         res.redirect('/cheerups');
