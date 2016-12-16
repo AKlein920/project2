@@ -1,6 +1,9 @@
 # project2
 GA WDIR Project 2
 
+**LIVE SITE**
+https://warm-beach-18335.herokuapp.com/cheerups
+
 **TECHNOLOGIES USED**
 - node.js
 - express
