@@ -29,7 +29,7 @@
             <li><a href='/cheerups/new'>Add Cheerup</a></li>
 
             <% if (currentUser.username === user.username) { %>
-              <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit This Cheerup</a></li>
+              <li><a href="/cheerups/<%=cheerup._id%>/edit">Edit Cheerup</a></li>
               <li><a href="/users/<%=currentUser._id%>">My Cheerups</a></li>
               <li><a href="/users/<%=currentUser._id%>/edit">My Account</a></li>
               <li><form class="" action="/sessions?_method=DELETE" method="post">

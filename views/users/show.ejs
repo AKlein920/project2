@@ -38,7 +38,7 @@
         <div class="cheerupsBox">
           <% for (var i=0; i<user.cheerupPage.length; i++) { %>
             <div class="cheerupContainer">
-                <img class='cheerupImgs img-rounded' src="<%=user.cheerupPage[i].visualmedia%>"/>
+                <a href="/cheerups/<%=user.cheerupPage[i]._id%>"><img class='cheerupImgs img-rounded' src="<%=user.cheerupPage[i].visualmedia%>"/></a>
                 <p id='cheerup-body'><%=user.cheerupPage[i].body%></p>
                 <p>Created on <%=moment(user.cheerupPage[i].createdat).format('dddd, MMMM Do, YYYY')%></p>
                 <% for (var j=0; j<user.cheerupPage[i].keywords.length; j++) { %>
