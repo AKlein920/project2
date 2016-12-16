@@ -47,7 +47,9 @@
 
           <p id='cheerup-cheers'><span class='glyphicon glyphicon-heart'></span><%=cheerups[i].cheers%></p>
           <% for (var k=0; k<cheerups[i].keywords.length; k++) { %>
-            <%=cheerups[i].keywords[k]%>
+            <p>
+              <%=cheerups[i].keywords[k]%>
+            </p>
           <% } %>
         </div>
       <% } %>
